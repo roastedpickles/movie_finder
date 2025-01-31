@@ -5,18 +5,20 @@ jobs:
     docker:
       - image: circleci/python:3.9
     steps:
-      - checkout  # Vérifier le code du dépôt
+      - checkout  # Vérifie le code source
       - run:
           name: Installer les dépendances
           command: |
             python -m venv venv
             . venv/bin/activate
+            pip install --upgrade pip  # Mise à jour de pip pour éviter des problèmes de compatibilité
             pip install -r requirements.txt
       - run:
           name: Exécuter les tests unitaires
           command: |
             . venv/bin/activate
             python -m unittest discover tests/
+
 
 workflows:
   version: 2
