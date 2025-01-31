@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Film Aléatoire</title>
+</head>
+<body>
+    <h1>Obtenir un film aléatoire</h1>
+    <button onclick="fetchMovie()">Obtenir un film</button>
+    <div id="movie-info">
+        <h2 id="title"></h2>
+        <p id="description"></p>
+        <img id="image" src="" alt="Movie image">
+    </div>
+
+    <script>
+        function fetchMovie() {
+            fetch('/random_movie')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        document.getElementById('title').innerText = data.title;
+                        document.getElementById('description').innerText = data.description;
+                        document.getElementById('image').src = data.image;
+                    }
+                });
+        }
+    </script>
+</body>
+</html>
